@@ -1,6 +1,6 @@
 .home__bg{
-    background-image: url(https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGZyaWVuZHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
-    height: 82vh;
+    background-image: url(https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8ZnJpZW5kc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60);
+    height: 84vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -10,4 +10,7 @@
 .home-message-icon{
     margin-left: 10px;
     display: inline-block;
+}
+.welcome_note{
+    font-family: 'Alkatra', cursive; 
 }

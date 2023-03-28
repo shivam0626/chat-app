@@ -9,7 +9,7 @@ const Navigation = () => {
     <Container>
       <LinkContainer to={'/'}>
         <Navbar.Brand >
-          <img src={logo} alt='logo' style={{height:70,width:70, borderRadius:10}} />
+          <img src={logo} alt='logo' style={{height:60,width:60, borderRadius:10}} />
         </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
