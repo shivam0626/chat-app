@@ -5,11 +5,12 @@ import logo from '../assets/logo.png';
 
 const Navigation = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" >
     <Container>
       <LinkContainer to={'/'}>
-        <Navbar.Brand >
-          <img src={logo} alt='logo' style={{height:60,width:60, borderRadius:10}} />
+        <Navbar.Brand className='d-flex flex-direction-row align-items-center justify-content-center'>
+          <img src={logo} alt='logo' style={{height:50,width:50, borderRadius:10}} />
+          <h2 style={{marginTop:"10px"}}>Whistler</h2>
         </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

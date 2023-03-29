@@ -1,6 +1,6 @@
 .signup__bg{
     background-image: url(https://images.unsplash.com/photo-1617194287757-601c20e2a698?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fExhcHRvcCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
-    height: 90vh;
+    height: 86vh;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -28,3 +28,7 @@
     cursor: pointer;
     z-index: 99;
 }
+#image-upload{
+    right:10px
+}
+

@@ -8,7 +8,8 @@ import Chat from './pages/Chat';
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className='App'>
+      <BrowserRouter>
        <Navigation />
        <Routes>
           <Route path='/' element={<Home />} />
@@ -16,7 +17,8 @@ function App() {
           <Route path='/signup' element ={<Signup />} />
           <Route path='/chat' element={<Chat />} />
        </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 }
 
