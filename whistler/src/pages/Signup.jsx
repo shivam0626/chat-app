@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import "./Signup.css";
 import profile from "../assets/profile.png";
 
+
 const Signup = () => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
@@ -24,15 +25,30 @@ const Signup = () => {
 
   const uploadImage = async() =>{
     const data = new FormData();
-    data.append('flie',image);
-    data.append('upload_preset','l7bcejcu')
+    data.append('file',image);
+    data.append('upload_preset','gfz9tbww')
+    try{
+      setUploadingImg(true);
+      let res = await fetch('https://api.cloudinary.com/v1_1/dpmwjg0e1/image/upload',{
+        method:'post',
+        body: data
+      });
+      const urlData = await res.json();
+      setUploadingImg(false);
+      return urlData.url;
+    }
+    catch(err){
+      setUploadingImg(false);
+      console.log(err);
+    }
   }
-  const handleSignup =(e)=>{
+  const handleSignup =async(e)=>{
     e.preventDefault();
     if(!image){
       return alert("Please upload your profile picture!");
     }
-    const url = await uploadImage(image)
+    const url = await uploadImage(image);
+    console.log(url);
   }
 
 
