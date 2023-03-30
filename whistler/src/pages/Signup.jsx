@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import "./Signup.css";
@@ -37,6 +37,7 @@ const Signup = () => {
       });
       const urlData = await res.json();
       setUploadingImg(false);
+      toast.success("Credential Saved!");
       return urlData.url;
     }
     catch(err){
@@ -52,8 +53,9 @@ const Signup = () => {
         return toast.warning("Please upload your profile picture!");
     }
     const url = await uploadImage(image);
-    toast.success("Credential Saved!");
     console.log(url);
+
+    // signup the user
   }
 
 
@@ -81,7 +83,7 @@ const Signup = () => {
             <Form.Control type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} value={password} />
           </Form.Group>
           <Button variant="primary" type="submit">
-           Create Account
+           {uploadingImg ? "Signing you up...":"Sign up"}
           </Button>
           <div className='py-4'>
               <p className='text-center'>
