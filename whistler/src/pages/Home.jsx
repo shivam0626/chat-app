@@ -5,6 +5,7 @@ import "./Home.css";
 
 const Home = () => {
   return (
+    <div className='home_main'>
     <Row>
         <Col md={6} className='d-flex flex-direction-column align-items-center justify-content-center'>
             <div>
@@ -20,6 +21,7 @@ const Home = () => {
         <Col md={6} className='home__bg'>
         </Col>
     </Row>
+    </div>
   )
 }
 

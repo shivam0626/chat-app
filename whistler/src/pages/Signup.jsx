@@ -69,7 +69,7 @@ const Signup = () => {
             <img src={imagePreview || user} alt='profile-pic' className='signup-profile-pic'/>
             <input type='file' id='image-upload' className='image__input' accept='image/png, image/jpeg' onChange={validateImg} />
           </div>
-        <Form.Group className="mb-3 mt-3" controlId="formBasicName">
+        <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" placeholder="Enter name" onChange={(e)=>setName(e.target.value)} value={name} />
           </Form.Group>

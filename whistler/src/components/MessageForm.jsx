@@ -14,7 +14,7 @@ const MessageForm = () => {
             <Row>
                 <Col md={10}>
                     <Form.Group>
-                        <Form.Control type='text' placeholder='your messsage'></Form.Control>
+                        <Form.Control type='text' placeholder='type your messsage...'></Form.Control>
                     </Form.Group>
                 </Col>
                 <Col md={2}>
