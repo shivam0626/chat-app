@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./Signup.css";
 import user from "../assets/user.png";
 import { toast } from 'react-toastify';
@@ -14,6 +14,7 @@ const Signup = () => {
   const [image,setImage] = useState(null);
   const [uploadingImg,setUploadingImg] = useState(false);
   const [imagePreview,setImagePreview] = useState(null);
+  const navigate = useNavigate();
 
   const [signupUser, {isLoading,error}] = useSignupUserMutation();
  
@@ -40,7 +41,7 @@ const Signup = () => {
       });
       const urlData = await res.json();
       setUploadingImg(false);
-      toast.success("Credential Saved!");
+      toast.success("Signup successfully!");
       return urlData.url;
     }
     catch(err){
@@ -51,7 +52,7 @@ const Signup = () => {
   }
   const handleSignup =async(e)=>{
     e.preventDefault();
-    toast.info("Saving credentials");
+    toast.info("Signing you up!");
     if(!image){
         return toast.warning("Please upload your profile picture!");
     }
@@ -62,6 +63,8 @@ const Signup = () => {
     signupUser({name,email,password,picture:url}).then((data)=>{
       if(data){
         console.log(data);
+        // navigate to login
+        navigate("/chat")
       }
     })
 
