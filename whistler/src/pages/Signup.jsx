@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import "./Signup.css";
 import user from "../assets/user.png";
 import { toast } from 'react-toastify';
+import {useSignupUserMutation} from "../services/appApi";
 
 
 const Signup = () => {
@@ -13,6 +14,8 @@ const Signup = () => {
   const [image,setImage] = useState(null);
   const [uploadingImg,setUploadingImg] = useState(false);
   const [imagePreview,setImagePreview] = useState(null);
+
+  const [signupUser, {isLoading,error}] = useSignupUserMutation();
  
 
   const validateImg =(e)=>{
@@ -56,6 +59,12 @@ const Signup = () => {
     console.log(url);
 
     // signup the user
+    signupUser({name,email,password,picture:url}).then((data)=>{
+      if(data){
+        console.log(data);
+      }
+    })
+
   }
 
 
