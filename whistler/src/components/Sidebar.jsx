@@ -1,8 +1,17 @@
 import React from 'react'
 import { ListGroup } from 'react-bootstrap'
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-    const rooms = ['first room','second room','third room','fourth room'];
+
+  const user = useSelector((state)=>state.user);
+  const rooms = ['first room','second room','third room','fourth room'];
+  if(!user){
+    return(
+      <></>
+    )
+  }
+
   return (
     <>
     <h2 className='mt-4'>Available Rooms</h2>
