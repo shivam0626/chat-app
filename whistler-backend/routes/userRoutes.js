@@ -30,7 +30,7 @@ router.post('/login', async(req,res)=> {
         const user = await User.findByCredentials(email,password);
         user.status = 'online';
         await user.save();
-        res.status(200).json(User);
+        res.status(200).json(user);
     } catch (e) {
         res.status(400).json(e.message);
     }

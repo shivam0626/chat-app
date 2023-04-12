@@ -6,6 +6,7 @@ import { AppContext } from '../context/appContext';
 const Sidebar = () => {
 
   const user = useSelector((state)=>state.user);
+  
   const { socket,currentRoom,setCurrentRoom,members,setMembers,
     privateMemberMsg,setPrivateMemberMsg,rooms,setRooms} = useContext(AppContext);
   socket.off('new-user').on('new-user',(payload)=>{

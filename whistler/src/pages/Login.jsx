@@ -20,7 +20,7 @@ const Login = () => {
         //  socket work
         socket.emit('new-user')
         // navigate to the chat
-        toast.success("Login successful!");
+        toast.success("Login successful !");
         navigate("/chat");
       }
     })

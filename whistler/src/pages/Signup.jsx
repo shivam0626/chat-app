@@ -41,12 +41,12 @@ const Signup = () => {
       });
       const urlData = await res.json();
       setUploadingImg(false);
-      toast.success("Signup successfully!");
+      toast.success("Signup successfully !");
       return urlData.url;
     }
     catch(err){
       setUploadingImg(false);
-      toast.error("Something went wrong!")
+      toast.error("Something went wrong !")
       console.log(err);
     }
   }
@@ -54,7 +54,7 @@ const Signup = () => {
     e.preventDefault();
     toast.info("Signing you up!");
     if(!image){
-        return toast.warning("Please upload your profile picture!");
+        return toast.warning("Please upload your profile picture !");
     }
     const url = await uploadImage(image);
     console.log(url);
