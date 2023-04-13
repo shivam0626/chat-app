@@ -25,7 +25,7 @@ const Sidebar = () => {
 
 
   const getRooms =()=>{
-    fetch('http:localhost:8000/rooms')
+    fetch('http://localhost:8000/rooms')
     .then((res)=>res.json())
     .then((data)=>setRooms(data))
   }
@@ -46,11 +46,13 @@ const Sidebar = () => {
         ))}
     </ListGroup>
     <h2 className='mt-4'>Members</h2>
+    <ListGroup>
     {members.map((m)=>(
       <ListGroup.Item key={m.id} style={{cursor:'pointer'}}>
           {m.name}
       </ListGroup.Item>
     ))}
+    </ListGroup>
     </>
   )
 }

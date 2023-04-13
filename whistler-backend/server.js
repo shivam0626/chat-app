@@ -53,17 +53,34 @@ function sortRoomMessagesByDate(messages){
 
 io.on('connection',(socket)=>{
 
+    // new user
     socket.on('new-user',async()=>{
         const members = await User.find();
         io.emit('new-user',members)
     })
 
+    // join room
     socket.on('join-room',async(room)=>{
         socket.join(room);
         let roomMessages = await getLastMessagesFromRoom(room);
         roomMessages = sortRoomMessagesByDate(roomMessages);
         socket.emit('room-messages',roomMessages)
     })
+
+    // message room
+    socket.on('message-room',async(room,content,sender,time,date) =>{
+        console.log('new-message',content);
+        const newMessage = await Message.create({content, from:sender, time, date, to:room});
+        let roomMessages = await getLastMessagesFromRoom(room);
+        roomMessages = sortRoomMessagesByDate(roomMessages);
+
+        // sending message to room
+        io.to(room).emit('room-messages',roomMessages);
+
+        socket.broadcast.emit('notifications',room)
+    })
+
+
 })
 
 server.listen(PORT, ()=>{
