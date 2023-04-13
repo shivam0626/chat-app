@@ -80,6 +80,24 @@ io.on('connection',(socket)=>{
         socket.broadcast.emit('notifications',room)
     })
 
+    // logout functionality
+
+    app.delete('/logout', async(req,res)=>{
+        try{
+            const {_id,newMessages} = req.body;
+            const user = await User.findById(_id);
+            user.status ='offline';
+            user.newMessages = newMessages;
+            await user.save();
+            const members = await User.find();
+            socket.broadcast.emit('new-user',members);
+            res.status(200).send();
+        }catch(e){
+            console.log(e);
+            res.status(400).send();
+        }
+    })
+
 
 })
 
