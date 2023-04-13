@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { ListGroup } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
+import { toast } from 'react-toastify';
+import { current } from '@reduxjs/toolkit';
 
 const Sidebar = () => {
 
@@ -30,6 +32,19 @@ const Sidebar = () => {
     .then((data)=>setRooms(data))
   }
 
+  const joinRoom = (room,isPublic=true) => {
+    if(!user){
+      return toast.warning("Please login");
+    }
+    socket.emit("join-room",room);
+    setCurrentRoom(room);
+
+    if(isPublic){
+      setPrivateMemberMsg(null)
+    }
+    // dispatch for notifications
+  }
+
   if(!user){
     return(
       <></>
@@ -40,8 +55,8 @@ const Sidebar = () => {
     <h2 className='mt-4'>Available Rooms</h2>
     <ListGroup>
         {rooms.map((room,idx)=>(
-            <ListGroup.Item key={idx}>
-                {room}
+            <ListGroup.Item key={idx} active={room === currentRoom} onClick={()=>joinRoom(room)} style={{cursor:"pointer", display:'flex', justifyContent:'space-between'}}>
+                {room} {currentRoom !== room && <span></span>}
             </ListGroup.Item>
         ))}
     </ListGroup>
