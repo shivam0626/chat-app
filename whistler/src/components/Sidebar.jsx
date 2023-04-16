@@ -3,7 +3,7 @@ import { ListGroup } from 'react-bootstrap'
 import { useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
 import { toast } from 'react-toastify';
-import { current } from '@reduxjs/toolkit';
+
 
 const Sidebar = () => {
 
@@ -30,6 +30,21 @@ const Sidebar = () => {
     fetch('http://localhost:8000/rooms')
     .then((res)=>res.json())
     .then((data)=>setRooms(data))
+  }
+
+  const orderIds = (id1,id2) =>{
+    if(id1 > id2){
+      return id1 + '-' + id2;
+    }
+    else{
+      return id2 +'-' + id1;
+    }
+  }
+
+  const handlePrivateMemberMsg = (member) =>{
+      setPrivateMemberMsg(member);
+      const roomId = orderIds(user._id,member._id);
+      joinRoom(roomId,false);
   }
 
   const joinRoom = (room,isPublic=true) => {
@@ -62,9 +77,9 @@ const Sidebar = () => {
     </ListGroup>
     <h2 className='mt-4'>Members</h2>
     <ListGroup>
-    {members.map((m)=>(
-      <ListGroup.Item key={m.id} style={{cursor:'pointer'}}>
-          {m.name}
+    {members.map((member)=>(
+      <ListGroup.Item key={member.id} style={{cursor:'pointer'}} active={privateMemberMsg?._id === member?._id} onClick={()=> handlePrivateMemberMsg(member)} disabled={member._id === user._id} >
+          {member.name}
       </ListGroup.Item>
     ))}
     </ListGroup>
