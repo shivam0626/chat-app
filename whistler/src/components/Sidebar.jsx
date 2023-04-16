@@ -1,16 +1,36 @@
 import React, { useContext, useEffect } from 'react'
 import { ListGroup } from 'react-bootstrap'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
 import { toast } from 'react-toastify';
+import { addNotifications, resetNotifications } from "../features/userSlice";
 
 
 const Sidebar = () => {
 
   const user = useSelector((state)=>state.user);
+  const dispatch = useDispatch();
   
   const { socket,currentRoom,setCurrentRoom,members,setMembers,
-    privateMemberMsg,setPrivateMemberMsg,rooms,setRooms} = useContext(AppContext);
+    privateMemberMsg,setPrivateMemberMsg,rooms,setRooms,newMessages,setNewMessages} = useContext(AppContext);
+
+  const joinRoom = (room,isPublic=true) => {
+    if(!user){
+      return toast.warning("Please login");
+    }
+    socket.emit("join-room",room);
+    setCurrentRoom(room);
+  
+    if(isPublic){
+      setPrivateMemberMsg(null)
+    }
+    // dispatch for notifications
+    dispatch(resetNotifications(room));
+    socket.off('notifications').on('notifications',(room)=>{
+      dispatch(addNotifications(room));
+    })
+  
+  }
 
   useEffect(()=>{
     if(user){
@@ -47,18 +67,6 @@ const Sidebar = () => {
       joinRoom(roomId,false);
   }
 
-  const joinRoom = (room,isPublic=true) => {
-    if(!user){
-      return toast.warning("Please login");
-    }
-    socket.emit("join-room",room);
-    setCurrentRoom(room);
-
-    if(isPublic){
-      setPrivateMemberMsg(null)
-    }
-    // dispatch for notifications
-  }
 
   if(!user){
     return(
@@ -71,7 +79,7 @@ const Sidebar = () => {
     <ListGroup>
         {rooms.map((room,idx)=>(
             <ListGroup.Item key={idx} active={room === currentRoom} onClick={()=>joinRoom(room)} style={{cursor:"pointer", display:'flex', justifyContent:'space-between'}}>
-                {room} {currentRoom !== room && <span></span>}
+                {room} {currentRoom !== room && <span className='badge rounded-pill bg-primary'>{user.newMessages[room]}</span>}
             </ListGroup.Item>
         ))}
     </ListGroup>
