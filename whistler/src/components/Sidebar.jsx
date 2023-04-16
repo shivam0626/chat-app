@@ -27,11 +27,14 @@ const Sidebar = () => {
     }
     // dispatch for notifications
     dispatch(resetNotifications(room));
-    socket.off('notifications').on('notifications',(room)=>{
-      dispatch(addNotifications(room));
-    })
   
   }
+
+  socket.off('notifications').on('notifications',(room)=>{
+    if(currentRoom !== room){
+      dispatch(addNotifications(room));
+    }
+  })
 
   useEffect(()=>{
     if(user){
