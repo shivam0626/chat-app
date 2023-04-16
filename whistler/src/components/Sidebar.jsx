@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, Row, Col} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppContext } from '../context/appContext';
 import { toast } from 'react-toastify';
 import { addNotifications, resetNotifications } from "../features/userSlice";
+import "./Sidebar.css";
 
 
 const Sidebar = () => {
@@ -12,7 +13,7 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   
   const { socket,currentRoom,setCurrentRoom,members,setMembers,
-    privateMemberMsg,setPrivateMemberMsg,rooms,setRooms,newMessages,setNewMessages} = useContext(AppContext);
+    privateMemberMsg,setPrivateMemberMsg,rooms,setRooms} = useContext(AppContext);
 
   const joinRoom = (room,isPublic=true) => {
     if(!user){
@@ -86,8 +87,21 @@ const Sidebar = () => {
     <h2 className='mt-4'>Members</h2>
     <ListGroup>
     {members.map((member)=>(
-      <ListGroup.Item key={member.id} style={{cursor:'pointer'}} active={privateMemberMsg?._id === member?._id} onClick={()=> handlePrivateMemberMsg(member)} disabled={member._id === user._id} >
-          {member.name}
+      <ListGroup.Item key={member._id} style={{cursor:'pointer'}} active={privateMemberMsg?._id === member?._id} onClick={()=> handlePrivateMemberMsg(member)} disabled={member._id === user._id} >
+         <Row>
+          <Col xs={2} className='member-status'>
+            <img src={member.picture} className='member-status-img' alt='user' />
+            {member.status === 'online'? <i className='fas fa-circle sidebar-online-status'></i> : <i className="fas fa-circle sidebar-offline-status"></i>}
+          </Col>
+          <Col xs={9}>
+            {member.name}
+            {member._id === user?._id && " (You)"}
+            {member.status === 'offline' && " (Offline)" }
+          </Col>
+          <Col xs={1}>
+          <span className='badge rounded-pill bg-primary'>{user.newMessages[orderIds(member._id,user._id)]}</span>
+          </Col>
+         </Row>
       </ListGroup.Item>
     ))}
     </ListGroup>
