@@ -19,7 +19,7 @@ const Sidebar = () => {
     if(!user){
       return toast.warning("Please login");
     }
-    socket.emit("join-room",room);
+    socket.emit("join-room",room,currentRoom);
     setCurrentRoom(room);
   
     if(isPublic){

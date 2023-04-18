@@ -44,13 +44,9 @@ const Navigation = () => {
             {user.name}
             </>
           } id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.4">
-             <Button variant="danger" onClick={handleLogout}>
+             <Button variant="danger" size={'sm'} onClick={handleLogout}>
                 Logout
              </Button>
             </NavDropdown.Item>

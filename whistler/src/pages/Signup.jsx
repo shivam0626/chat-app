@@ -41,7 +41,6 @@ const Signup = () => {
       });
       const urlData = await res.json();
       setUploadingImg(false);
-      toast.success("Signup successfully !");
       return urlData.url;
     }
     catch(err){
@@ -81,6 +80,7 @@ const Signup = () => {
             <img src={imagePreview || user} alt='profile-pic' className='signup-profile-pic'/>
             <input type='file' id='image-upload' className='image__input' accept='image/png, image/jpeg' onChange={validateImg} />
           </div>
+          {error && <p className='alert alert-danger'>{error.data}</p>}
         <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control type="text" placeholder="Enter name" onChange={(e)=>setName(e.target.value)} value={name} />
@@ -95,7 +95,7 @@ const Signup = () => {
             <Form.Control type="password" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} value={password} />
           </Form.Group>
           <Button variant="primary" type="submit">
-           {uploadingImg ? "Signing you up...":"Sign up"}
+           {uploadingImg  || isLoading ? "Signing you up...":"Sign up"}
           </Button>
           <div className='py-4'>
               <p className='text-center'>

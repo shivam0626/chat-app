@@ -60,9 +60,10 @@ io.on('connection',(socket)=>{
     })
 
     // join room
-    socket.on('join-room',async(room)=>{
-        socket.join(room);
-        let roomMessages = await getLastMessagesFromRoom(room);
+    socket.on('join-room',async(newRoom,previousRoom)=>{
+        socket.join(newRoom);
+        socket.leave(previousRoom);
+        let roomMessages = await getLastMessagesFromRoom(newRoom);
         roomMessages = sortRoomMessagesByDate(roomMessages);
         socket.emit('room-messages',roomMessages)
     })
