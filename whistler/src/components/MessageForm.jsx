@@ -60,7 +60,7 @@ const MessageForm = () => {
                     <div className='alert alert-info conversation-info'>
                         <div>
                             Your conversation with {privateMemberMsg.name} 
-                            <img src={privateMemberMsg.picture} className='conversation-profile-picture' alt='private-msg' />
+                            <img src={privateMemberMsg.picture} className='conversation-profile-pic' alt='private-msg' />
                         </div>
                     </div>
                 </>
