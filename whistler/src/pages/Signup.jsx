@@ -45,13 +45,11 @@ const Signup = () => {
     }
     catch(err){
       setUploadingImg(false);
-      toast.error("Something went wrong !")
       console.log(err);
     }
   }
   const handleSignup =async(e)=>{
     e.preventDefault();
-    toast.info("Signing you up!");
     if(!image){
         return toast.warning("Please upload your profile picture !");
     }
