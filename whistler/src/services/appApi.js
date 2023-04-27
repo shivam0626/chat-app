@@ -1,11 +1,12 @@
 import { createApi,fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// define a service qusing base url
+// define a service using base url
+const BASE_URL = 'https://whistler.onrender.com';
 
 const appApi = createApi({
     reducerPath:'appApi',
     baseQuery: fetchBaseQuery({
-        baseUrl:'http://localhost:8000'
+        baseUrl: BASE_URL
     }),
 
     endpoints: (builder) =>({
