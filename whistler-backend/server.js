@@ -16,11 +16,11 @@ app.use("/users",userRoutes)
 require('./connection');
 
 const server = require('http').createServer(app);
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 8000;
 
 const io = require('socket.io')(server,{
     cors:{
-        origin: 'http://localhost:3000',
+        origin: 'https://whistler.vercel.app',
         methods: ['GET','POST','DELETE']
     }
 })
