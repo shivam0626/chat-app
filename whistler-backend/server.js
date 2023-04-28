@@ -71,7 +71,7 @@ io.on('connection',(socket)=>{
 
     // message room
     socket.on('message-room',async(room,content,sender,time,date) =>{
-        console.log('new-message',content);
+        // console.log('new-message',content);
         const newMessage = await Message.create({content, from:sender, time, date, to:room});
         let roomMessages = await getLastMessagesFromRoom(room);
         roomMessages = sortRoomMessagesByDate(roomMessages);
