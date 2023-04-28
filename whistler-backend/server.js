@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 8000;
 
 const io = require('socket.io')(server,{
     cors:{
-        origin: 'https://whistler.vercel.app/',
+        origin: 'http://localhost:3000',
         methods: ['GET','POST','DELETE']
     }
 })
