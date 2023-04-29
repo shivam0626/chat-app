@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   const getRooms =()=>{
     // rooms
-    fetch('http://localhost:8000/rooms')
+    fetch('https://whistler.onrender.com/rooms')
     .then((res)=>res.json())
     .then((data)=>setRooms(data))
   }
